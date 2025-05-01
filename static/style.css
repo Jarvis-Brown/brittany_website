@@ -1,0 +1,63 @@
+* {
+    box-sizing: border-box;
+}
+
+/* media query */
+
+/* Nav Bar */
+#logo {
+    height: 5vh;
+}
+
+/* About Me */
+
+h1 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.main_info {
+    margin-top: 2rem;
+}
+
+.about_me_img {
+    height: 400px;
+    display: flex;
+    justify-self: center;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+form {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.form-bg {
+    background-color: lavender;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.insta-icon {
+    height: 30px;
+}
+
+.submit-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.footer-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 40px;
+}

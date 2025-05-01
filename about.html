@@ -12,28 +12,113 @@
         <link rel="stylesheet" href="/static/style.css" />
     </head>
     <body>
-        <h1>About Me</h1>
-        <div class="about-group">
-            <img
-                src="/static/images/brittany_better_pic.jpg"
-                alt="image of Brittany working with clay"
-            />
-            <p>
-                I am particularly drawn to the imperfections and uniqueness of
-                handmade pottery, where each slight variation tells its own
-                story. The tactile qualities of clay and the slow, deliberate
-                rhythm of working with my hands allow me to focus on
-                craftsmanship and the intimate relationship between maker and
-                material. As a beginner, I am constantly learning, experimenting
-                with different techniques and glazes to develop my own style. My
-                work is inspired by the natural world—earth tones, flowing
-                lines, and simple, elegant forms that invite interaction. I aim
-                to create pieces that are not only visually pleasing but also
-                functional and comforting in everyday use. Ultimately, my goal
-                is to craft pottery that encourages a deeper connection with the
-                objects we use, fostering an appreciation for the handmade and
-                the beauty found in the imperfect.
-            </p>
-        </div>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"
+                    ><img
+                        id="logo"
+                        src="/static/images/bj_logo_complete.png"
+                        alt="Brooklyn Red's Logo"
+                /></a>
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a
+                                class="nav-link active"
+                                aria-current="page"
+                                href="#"
+                                >Home</a
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Gallery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About Me</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <main class="container main_info">
+            <section class="section_info">
+                <img
+                    class="img-fluid about_me_img"
+                    src="/static/images/brittany_better_pic.jpg"
+                    alt="image of Brittany working with clay"
+                />
+                <h1>About Me</h1>
+                <p class="text_info">
+                    I am particularly drawn to the imperfections and uniqueness
+                    of handmade pottery, where each slight variation tells its
+                    own story. The tactile qualities of clay and the slow,
+                    deliberate rhythm of working with my hands allow me to focus
+                    on craftsmanship and the intimate relationship between maker
+                    and material. As a beginner, I am constantly learning,
+                    experimenting with different techniques and glazes to
+                    develop my own style. My work is inspired by the natural
+                    world—earth tones, flowing lines, and simple, elegant forms
+                    that invite interaction. I aim to create pieces that are not
+                    only visually pleasing but also functional and comforting in
+                    everyday use. Ultimately, my goal is to craft pottery that
+                    encourages a deeper connection with the objects we use,
+                    fostering an appreciation for the handmade and the beauty
+                    found in the imperfect.
+                </p>
+            </section>
+            <section class="section_info">
+                <h1>Contact</h1>
+                <div class="form-bg">
+                    <form>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label"
+                                >Email address</label
+                            >
+                            <input
+                                type="email"
+                                class="form-control"
+                                id="exampleInputEmail1"
+                                aria-describedby="emailHelp"
+                            />
+                        </div>
+                        <div class="form-floating">
+                            <textarea
+                                class="form-control"
+                                placeholder="Leave a comment here"
+                                id="floatingTextarea"
+                            ></textarea>
+                            <label for="floatingTextarea">Comments</label>
+                        </div>
+                        <div class="submit-btn">
+                            <button type="submit" class="btn btn-primary">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <div class="footer-info">
+                <h2>Follow Me!</h2>
+                <img
+                    class="insta-icon"
+                    src="/static/images/instagram.svg"
+                    alt="instagram icon"
+                />
+            </div>
+        </footer>
     </body>
 </html>
