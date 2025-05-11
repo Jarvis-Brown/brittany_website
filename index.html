@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Brittany Pottery Website</title>
+        <title>Brittany About Page</title>
         <link
             rel="stylesheet"
             href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -12,60 +12,58 @@
         <link rel="stylesheet" href="/static/style.css" />
     </head>
     <body>
-        <header class="site header">
-            <div>
+        <nav class="navbar navbar-expand-lg nav_bg">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/index.html"
+                    ><img
+                        id="logo"
+                        src="/static/images/bj_logo_complete.png"
+                        alt="Brooklyn Red's Logo"
+                /></a>
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/gallery.html">Gallery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about.html">About Me</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contact.html">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <main class="container main_info">
+            <section class="section_info">
                 <img
-                    id="logo"
-                    src="/static/images/bj_logo_complete.png"
-                    alt="Brooklyn Red's Logo"
+                    class="img-fluid about_me_img"
+                    src="/static/images/brittany_better_pic.jpg"
+                    alt="image of Brittany working with clay"
                 />
-                <h1 id="artist-name">Brooklyn Red</h1>
-            </div>
-            <nav>
-                <ul id="siteNav">
-                    <li></li>
-                </ul>
-            </nav>
-        </header>
-
-        <img
-            class="heroImg"
-            src="/static/images/green, pink_purple_diagonal.jpg"
-            alt="Images of cups"
-        />
-
-        <h1>Artist Statement</h1>
-        <p>
-            As a ceramics artist, I explore the beauty of handmade pottery,
-            embracing the unique textures and forms that emerge through the
-            process. Each piece I create reflects my connection to nature and my
-            desire to blend functionality with artistry. Through clay, I aim to
-            craft simple, elegant works that invite touch and elevate everyday
-            experiences.
-        </p>
-
-        <div>
-            <h1>My Collection</h1>
-            <div class="cup-section">
-                <p>Cups</p>
-                <img src="/static/images/pink_stack.jpg" alt="Green cups" />
-            </div>
-            <div class="vase-section">
-                <p>Vases</p>
-                <img
-                    src="/static/images/green_triangle_plant.jpg"
-                    alt="Green cups"
-                />
-            </div>
-        </div>
-
-        <footer>
-            <ul>
-                <li>Contact</li>
-                <li></li>
-            </ul>
-        </footer>
-
-        <script src="index.js"></script>
+                <h1 class="reg_header">Artist Statment</h1>
+                <p class="text_info">
+                    As a ceramics artist, I explore the beauty of handmade
+                    pottery, embracing the unique textures and forms that emerge
+                    through the process. Each piece I create reflects my
+                    connection to nature and my desire to blend functionality
+                    with artistry. Through clay, I aim to craft simple, elegant
+                    works that invite touch and elevate everyday experiences.
+                </p>
+            </section>
+        </main>
     </body>
 </html>

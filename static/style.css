@@ -13,9 +13,14 @@
     background-color: #ccccff;
 }
 
-/* About Me */
+/* GALLERY */
 
-h1 {
+.gallery_group {
+}
+
+/* ABOUT ME */
+
+.reg_header {
     text-align: center;
     margin-bottom: 10px;
 }
@@ -32,24 +37,54 @@ h1 {
     margin-bottom: 25px;
 }
 
-h2 {
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-form {
-    width: 60%;
-    margin: 0 auto;
-}
+/* CONTACT */
 
 .form-bg {
-    background-color: lavender;
-    padding: 20px;
+    background-color: #bfb78f;
+    padding: 55px;
     border-radius: 20px;
+    margin: 65px;
+    display: flex;
 }
 
-.insta-icon {
-    height: 30px;
+#contact_line {
+    border: 2px solid black;
+    height: auto;
+    align-self: stretch;
+}
+
+/* -- Chat Section -- */
+
+.chat_section {
+    flex: 1;
+    padding-right: 55px;
+}
+
+.chat_main_header {
+    padding-bottom: 60px;
+}
+
+.chat_header {
+    padding-bottom: 30px;
+}
+
+.instagram_icon {
+    padding-bottom: 30px;
+    height: 60px;
+}
+
+.pot_icon {
+    max-height: 150px;
+    justify-self: center;
+    display: flex;
+}
+
+/* -- Message Section -- */
+
+.message_section {
+    flex: 1;
+    justify-content: center;
+    padding-left: 55px;
 }
 
 .submit-btn {
@@ -58,10 +93,7 @@ form {
     margin-top: 15px;
 }
 
-.footer-info {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin: 40px;
+.btn {
+    background-color: #807440;
+    border-color: #807440;
 }
