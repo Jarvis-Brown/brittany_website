@@ -15,7 +15,10 @@
 
 /* GALLERY */
 
-.gallery_group {
+.gallery_img {
+    height: 350px;
+    object-fit: cover;
+    width: 100%;
 }
 
 /* ABOUT ME */
@@ -27,6 +30,7 @@
 
 .main_info {
     margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 .about_me_img {
@@ -83,14 +87,23 @@
 
 .message_section {
     flex: 1;
-    justify-content: center;
+    flex-direction: column;
     padding-left: 55px;
+    position: relative;
 }
 
 .submit-btn {
     display: flex;
     justify-content: center;
     margin-top: 15px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+textarea {
+    height: 200px;
 }
 
 .btn {
