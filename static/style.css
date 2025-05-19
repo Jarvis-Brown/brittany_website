@@ -13,6 +13,8 @@
     background-color: #ccccff;
 }
 
+/* INDEX */
+
 /* GALLERY */
 
 .gallery_img {
@@ -34,7 +36,7 @@
 }
 
 .about_me_img {
-    height: 300px;
+    max-height: 300px;
     display: flex;
     justify-self: center;
     border-radius: 10px;
@@ -49,6 +51,7 @@
     border-radius: 20px;
     margin: 65px;
     display: flex;
+    flex: 1;
 }
 
 #contact_line {
@@ -65,11 +68,12 @@
 }
 
 .chat_main_header {
-    padding-bottom: 60px;
+    padding-bottom: 20px;
+    font-size: 4rem;
 }
 
 .chat_header {
-    padding-bottom: 30px;
+    padding-bottom: 10px;
 }
 
 .instagram_icon {
@@ -90,23 +94,31 @@
     flex-direction: column;
     padding-left: 55px;
     position: relative;
+    min-height: 100%;
+    display: flex;
 }
 
 .submit-btn {
     display: flex;
     justify-content: center;
-    margin-top: 15px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    margin-top: auto;
+    padding-top: 15px;
+    margin-top: auto;
 }
 
 textarea {
     height: 200px;
+    min-height: 150px;
+    flex-grow: 1;
 }
 
 .btn {
     background-color: #807440;
     border-color: #807440;
+}
+
+.submit_btn:hover {
+    background-color: #6e6537;
+    border-color: #6e6537;
+    color: white;
 }
