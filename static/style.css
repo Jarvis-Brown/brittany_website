@@ -2,6 +2,12 @@
     box-sizing: border-box;
 }
 
+html,
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
 /* media query */
 
 /* Nav Bar */
@@ -13,12 +19,45 @@
     background-color: #ccccff;
 }
 
+.nav-link:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.navbar-brand:hover {
+    color: #7171aa;
+}
+
+.nav-link:hover {
+    color: #7171aa;
+}
+
+.navbar-toggler:hover {
+    background-color: #7171aa;
+}
+.navbar-toggler:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.navbar-toggler {
+    border: none;
+    background-color: transparent;
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active {
+    background-color: transparent;
+    outline: none;
+    box-shadow: none;
+}
+
 /* INDEX */
 
 /* GALLERY */
 
 .gallery_img {
-    height: 350px;
+    max-height: 350px;
     object-fit: cover;
     width: 100%;
 }
@@ -47,7 +86,7 @@
 
 .form-bg {
     background-color: #bfb78f;
-    padding: 55px;
+    padding: 35px;
     border-radius: 20px;
     margin: 65px;
     display: flex;
@@ -64,7 +103,7 @@
 
 .chat_section {
     flex: 1;
-    padding-right: 55px;
+    padding-right: 35px;
 }
 
 .chat_main_header {
@@ -74,11 +113,43 @@
 
 .chat_header {
     padding-bottom: 10px;
+    font-size: 2.5rem;
+}
+
+.email_p {
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+.social_icon_container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding-bottom: 20px;
+}
+
+.circle_btn {
+    background-color: #807440;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.circle_btn:hover {
+    background-color: #6e6537;
+    border-color: #6e6537;
+    color: white;
+    cursor: pointer;
 }
 
 .instagram_icon {
-    padding-bottom: 30px;
-    height: 60px;
+    height: 25px;
+}
+
+.etsy_icon {
+    height: 20px;
 }
 
 .pot_icon {
@@ -92,7 +163,7 @@
 .message_section {
     flex: 1;
     flex-direction: column;
-    padding-left: 55px;
+    padding-left: 35px;
     position: relative;
     min-height: 100%;
     display: flex;
@@ -115,10 +186,155 @@ textarea {
 .btn {
     background-color: #807440;
     border-color: #807440;
+    width: 170px;
+    height: 50px;
 }
 
 .submit_btn:hover {
     background-color: #6e6537;
     border-color: #6e6537;
     color: white;
+    cursor: pointer;
+}
+
+/* Media Queries */
+
+@media (max-width: 890px) {
+    /* Gallery */
+
+    /* Contact */
+
+    .form-bg {
+        flex-direction: column;
+        margin: 30px;
+    }
+
+    .chat_main_header {
+        text-align: center;
+        font-size: 2.4rem;
+        padding-bottom: 15px;
+    }
+
+    .chat_section {
+        padding-right: 0px;
+    }
+
+    .chat_section_info {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .chat_header {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+
+    .client_email {
+        order: 1;
+    }
+
+    .email_p {
+        font-size: 1.3rem;
+    }
+
+    .pot_div {
+        order: 2;
+    }
+
+    .pot_icon {
+        height: 80px;
+    }
+
+    .client_social {
+        order: 3;
+    }
+
+    .social_icon_container {
+        justify-content: center;
+    }
+
+    .circle_btn {
+        height: 50px;
+        width: 50px;
+    }
+
+    .message_section {
+        padding-left: 0px;
+        padding-top: 30px;
+    }
+
+    textarea {
+        height: 100px;
+    }
+}
+@media (max-width: 767px) {
+    /* Contact */
+
+    .form-bg {
+        padding: 20px;
+        margin: 30px 10px 10px 10px;
+    }
+
+    .chat_section {
+        padding-bottom: 20px;
+    }
+
+    .chat_main_header {
+        font-size: 2rem;
+    }
+
+    .chat_header {
+        font-size: 1.5rem;
+        padding-bottom: 5px;
+    }
+
+    .email_p {
+        font-size: 1rem;
+    }
+
+    p.email_p {
+        margin-bottom: 0px;
+    }
+
+    .pot_icon {
+        height: 60px;
+    }
+
+    .social_icon_container {
+        padding-bottom: 0px;
+    }
+
+    .message_section {
+        padding-top: 20px;
+    }
+}
+
+@media (max-width: 500px) {
+    .chat_section_info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .client_email {
+        order: 1;
+    }
+
+    .pot_div {
+        order: 3;
+    }
+
+    .client_social {
+        order: 2;
+    }
+
+    .btn {
+        height: 50px;
+        width: 150px;
+    }
 }

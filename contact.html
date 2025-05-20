@@ -47,34 +47,51 @@
         </nav>
         <section class="section_info">
             <div class="form-bg">
-                <div class="chat_section">
+                <div class="chat_section area_1">
                     <h1 class="chat_main_header">Let's Chat!</h1>
-                    <div>
-                        <h2 class="chat_header">Email</h2>
-                        <p>iykykclay@gmail.com</p>
-                    </div>
-                    <div>
-                        <h2 class="chat_header">Social</h2>
-                        <a href="https://www.instagram.com/iykyk_clay/"
-                            ><img
-                                src="/static/images/instagram.svg"
-                                class="instagram_icon"
-                                alt="instagram icon"
-                        /></a>
-                    </div>
-                    <div>
-                        <img
-                            src="/static/images/brittany_pottery_web.png"
-                            class="pot_icon"
-                            alt="drawing of clay pot with handles"
-                        />
+                    <div class="chat_section_info">
+                        <div class="client_email">
+                            <h2 class="chat_header">Email</h2>
+                            <p class="email_p">iykykclay@gmail.com</p>
+                        </div>
+                        <div class="client_social">
+                            <h2 class="chat_header">Social</h2>
+                            <div class="social_icon_container">
+                                <div class="circle_btn">
+                                    <a
+                                        href="https://www.instagram.com/iykyk_clay/"
+                                        ><img
+                                            src="/static/images/instagram.svg"
+                                            class="icon instagram_icon"
+                                            alt="instagram icon"
+                                    /></a>
+                                </div>
+
+                                <div class="circle_btn">
+                                    <a href="">
+                                        <img
+                                            src="/static/images/etsy.svg"
+                                            class="etsy_icon"
+                                            alt="etsy icon"
+                                        />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pot_div">
+                            <img
+                                src="/static/images/brittany_pottery_web.png"
+                                class="pot_icon"
+                                alt="drawing of clay pot with handles"
+                            />
+                        </div>
                     </div>
                 </div>
 
-                <div id="contact_line"></div>
+                <div id="contact_line" class="area_2"></div>
 
-                <form class="message_section">
-                    <div class="mb-3 user_info">
+                <form class="message_section area_3">
+                    <div class="mb-3 user_name">
                         <input
                             type="text"
                             class="form-control"
@@ -84,7 +101,7 @@
                             required
                         />
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3 email_text_area">
                         <input
                             type="email"
                             class="form-control"
@@ -94,7 +111,7 @@
                             required
                         />
                     </div>
-                    <div>
+                    <div class="text_area">
                         <textarea
                             class="form-control"
                             placeholder="Message"
@@ -117,5 +134,6 @@
             integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
             crossorigin="anonymous"
         ></script>
+        <script src="/static/navbar.js"></script>
     </body>
 </html>
