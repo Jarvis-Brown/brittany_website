@@ -7,8 +7,37 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
+    font-family: "Cormorant_Reg", sans-serif;
 }
-/* media query */
+
+@font-face {
+    font-family: "Brittany";
+    src: url("/static/fonts/BrittanySignatureRegular.woff2") format("woff2"),
+        url("/static/fonts/BrittanySignatureRegular.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Cormorant_Reg";
+    src: url("/static/fonts/CormorantGaramond-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Cormorant_Bold";
+    src: url("/static/fonts/CormorantGaramond-Bold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Cormorant_SemiBold";
+    src: url("/static/fonts/CormorantGaramond-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Cormorant_Mid";
+    src: url("/static/fonts/CormorantGaramond-Medium.ttf") format("truetype");
+}
 
 /* Nav Bar */
 #logo {
@@ -52,8 +81,6 @@ body {
     box-shadow: none;
 }
 
-/* INDEX */
-
 /* GALLERY */
 
 .gallery_img {
@@ -67,6 +94,12 @@ body {
 .reg_header {
     text-align: center;
     margin-bottom: 10px;
+    font-family: "Brittany", cursive;
+    font-size: 1.8rem;
+}
+
+p {
+    font-size: 1.25rem;
 }
 
 .main_info {
@@ -88,7 +121,7 @@ body {
     background-color: #bfb78f;
     padding: 35px;
     border-radius: 20px;
-    margin: 65px;
+    margin: 2rem;
     display: flex;
     flex: 1;
 }
@@ -109,16 +142,19 @@ body {
 .chat_main_header {
     padding-bottom: 20px;
     font-size: 4rem;
+    font-family: "Brittany";
+    max-width: 100%;
+    line-height: 1.8;
 }
 
 .chat_header {
     padding-bottom: 10px;
     font-size: 2.5rem;
+    font-family: "Cormorant_Bold";
 }
 
 .email_p {
     font-size: 1.8rem;
-    text-align: center;
 }
 
 .social_icon_container {
@@ -188,6 +224,7 @@ textarea {
     border-color: #807440;
     width: 170px;
     height: 50px;
+    font-family: "Cormorant_SemiBold";
 }
 
 .submit_btn:hover {
@@ -291,10 +328,6 @@ textarea {
         padding-bottom: 5px;
     }
 
-    .email_p {
-        font-size: 1rem;
-    }
-
     p.email_p {
         margin-bottom: 0px;
     }
@@ -336,5 +369,6 @@ textarea {
     .btn {
         height: 50px;
         width: 150px;
+        font-size: 0.8;
     }
 }
