@@ -4,50 +4,31 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Upload Page</title>
-        <style>
-            body {
-                font-family: sans-serif;
-                padding: 20px;
-            }
-            .image-grid {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 10px;
-                margin-top: 20px;
-            }
-            .image-item {
-                position: relative;
-            }
-            .image-item img {
-                height: 150px;
-                width: auto;
-                border-radius: 5px;
-            }
-            .delete-btn {
-                position: absolute;
-                top: 5px;
-                right: 5px;
-                background: red;
-                color: white;
-                border: none;
-                cursor: pointer;
-            }
-        </style>
+        <link rel="stylesheet" href="/static/upload.css" />
     </head>
     <body>
-        <h1>Pottery Upload</h1>
+        <div class="section">
+            <h1>Upload Images</h1>
 
-        <div id="auth">
-            <input type="email" id="email" placeholder="Email" />
-            <input type="password" id="password" placeholder="Password" />
-            <button onclick="login()">Login</button>
-            <button onclick="logout()">Logout</button>
-        </div>
+            <!-- Login Form -->
+            <div id="auth">
+                <input type="email" id="email" placeholder="Email" />
+                <input type="password" id="password" placeholder="Password" />
+                <button onclick="login()">Login</button>
+            </div>
 
-        <div id="upload-section" style="display: none">
-            <input type="file" id="fileInput" />
-            <button onclick="uploadImage()">Upload</button>
-            <div class="image-grid" id="imageGrid"></div>
+            <!-- Upload Section -->
+            <div id="upload-section" style="display: none; text-align: center">
+                <input type="file" id="fileInput" />
+                <button onclick="uploadImage()">Upload</button>
+
+                <!-- Logout button centered below -->
+                <div style="margin-top: 20px">
+                    <button onclick="logout()">Logout</button>
+                </div>
+
+                <div class="image-grid" id="imageGrid"></div>
+            </div>
         </div>
 
         <!-- Firebase Scripts -->

@@ -1,0 +1,50 @@
+@font-face {
+    font-family: "Cormorant_Reg";
+    src: url("/static/fonts/CormorantGaramond-Regular.ttf") format("truetype");
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Cormorant_Reg", sans-serif;
+    height: 100vh;
+}
+
+.section {
+    display: flex;
+
+    flex-direction: column;
+
+    height: 100vh;
+}
+
+h1 {
+    text-align: center;
+}
+
+.image-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.image-item {
+    position: relative;
+}
+
+.image-item img {
+    height: 150px;
+    width: auto;
+    border-radius: 5px;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
