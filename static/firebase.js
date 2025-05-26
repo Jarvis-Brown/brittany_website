@@ -1,4 +1,4 @@
-// Unified Firebase Script for Upload + Gallery
+// Firebase Core + Features
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import {
     getAuth,
@@ -12,21 +12,20 @@ import {
     listAll,
     getDownloadURL,
     deleteObject,
-    uploadBytes,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 import Sortable from "https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/modular/sortable.esm.js";
 
-// Firebase project configuration
+// Firebase Config
 const firebaseConfig = {
     apiKey: "AIzaSyBzUOCTAqQf7aQDD_ti4MhXVKli8ZtZhJw",
     authDomain: "potterysite-brittany.firebaseapp.com",
     projectId: "potterysite-brittany",
-    storageBucket: "potterysite-brittany.appspot.com", // ← this line is critical
+    storageBucket: "potterysite-brittany.firebasestorage.app",
     messagingSenderId: "647969435737",
     appId: "1:647969435737:web:cebf7e67611b5f0596c148",
 };
 
-// Initialize Firebase
+// Init Services
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const storage = getStorage();
@@ -38,7 +37,7 @@ const fileInput = document.getElementById("fileInput");
 const imageGrid =
     document.getElementById("imageGrid") || document.querySelector(".row");
 
-// Load images into imageGrid (used by both upload and gallery pages)
+// Load Images from Firebase Storage
 function loadImages() {
     const folderRef = ref(storage, "uploads");
     listAll(folderRef).then((res) => {
@@ -63,7 +62,7 @@ function loadImages() {
     });
 }
 
-// Enable drag-and-drop sorting if Sortable and gallery are present
+// Drag-and-drop sorting
 function enableSorting() {
     if (imageGrid) {
         new Sortable(imageGrid, {
@@ -75,23 +74,48 @@ function enableSorting() {
     }
 }
 
-// Upload image to Firebase
-window.uploadImage = function () {
+// ✅ Upload image using signed URL from your HTTPS function
+window.uploadImage = async function () {
     const file = fileInput?.files?.[0];
     if (!file) {
         alert("Please select a file to upload.");
         return;
     }
-    const fileRef = ref(storage, `uploads/${Date.now()}-${file.name}`);
-    uploadBytes(fileRef, file)
-        .then(() => {
-            alert("Image uploaded successfully!");
-            loadImages();
-        })
-        .catch((err) => {
-            alert("Upload failed: " + err.message);
-            console.error("Upload error:", err);
+
+    try {
+        // STEP 1: Get a signed upload URL from your deployed Firebase function
+        const response = await fetch(
+            "https://getsignedurl-cpn3o4aa6a-uc.a.run.app", // ⚠️ ← Your new function URL
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    filename: file.name,
+                    contentType: file.type,
+                }),
+            }
+        );
+
+        if (!response.ok) throw new Error("Failed to get signed URL");
+        const { url, path } = await response.json();
+
+        // STEP 2: Upload directly to the signed URL
+        const uploadRes = await fetch(url, {
+            method: "PUT",
+            headers: { "Content-Type": file.type },
+            body: file,
         });
+
+        if (!uploadRes.ok) throw new Error("Upload failed");
+
+        alert("Image uploaded successfully!");
+        loadImages();
+    } catch (err) {
+        alert("Upload failed: " + err.message);
+        console.error("Upload error:", err);
+    }
 };
 
 // Delete image from Firebase
@@ -110,7 +134,7 @@ imageGrid?.addEventListener("click", (e) => {
     }
 });
 
-// Auth functions
+// Auth: login
 window.login = function () {
     const email = document.getElementById("email")?.value;
     const password = document.getElementById("password")?.value;
@@ -123,13 +147,14 @@ window.login = function () {
         });
 };
 
+// Auth: logout
 window.logout = function () {
     signOut(auth).then(() => {
         alert("Logged out");
     });
 };
 
-// Show/hide UI depending on authentication status
+// Handle UI on login state change
 onAuthStateChanged(auth, (user) => {
     if (user) {
         uploadSection?.style && (uploadSection.style.display = "block");
