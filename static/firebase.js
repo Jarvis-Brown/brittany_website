@@ -1,4 +1,4 @@
-// Firebase Core + Features
+// Unified Firebase Script for Upload + Gallery
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import {
     getAuth,
@@ -12,20 +12,21 @@ import {
     listAll,
     getDownloadURL,
     deleteObject,
+    uploadBytes,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 import Sortable from "https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/modular/sortable.esm.js";
 
-// Firebase Config
+// Firebase project configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyBzUOCTAqQf7aQDD_ti4MhXVKli8ZtZhJw",
+    apiKey: "AIzaSyBzUOCTAqQf7aQDD_ti4MhXVKli8tZzhJw",
     authDomain: "potterysite-brittany.firebaseapp.com",
     projectId: "potterysite-brittany",
-    storageBucket: "potterysite-brittany.firebasestorage.app",
+    storageBucket: "potterysite-brittany.appspot.com",
     messagingSenderId: "647969435737",
     appId: "1:647969435737:web:cebf7e67611b5f0596c148",
 };
 
-// Init Services
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const storage = getStorage();
@@ -34,136 +35,98 @@ const storage = getStorage();
 const uploadSection = document.getElementById("upload-section");
 const authSection = document.getElementById("auth");
 const fileInput = document.getElementById("fileInput");
-const imageGrid =
-    document.getElementById("imageGrid") || document.querySelector(".row");
+// imageGrid covers both upload & gallery pages
+const imageGrid = document.getElementById("imageGrid") || document.querySelector(".row");
 
-// Load Images from Firebase Storage
+// Function to load images into the grid
 function loadImages() {
+    if (!imageGrid) return;
     const folderRef = ref(storage, "uploads");
-    listAll(folderRef).then((res) => {
-        imageGrid.innerHTML = "";
-        res.items.forEach((itemRef) => {
-            getDownloadURL(itemRef).then((url) => {
-                const div = document.createElement("div");
-                div.classList.add("col", "image-item");
-                div.innerHTML = `
-                    <div class="card shadow-sm" style="position: relative;">
-                        <img
-                            class="gallery_img card-img"
-                            alt="image of clay piece"
-                            src="${url}"
-                        />
-                        <button class="delete-btn" data-path="${itemRef.fullPath}" style="position:absolute;top:5px;right:5px;background:red;color:white;border:none;cursor:pointer;">X</button>
-                    </div>
-                `;
-                imageGrid.appendChild(div);
+    listAll(folderRef)
+        .then((res) => {
+            imageGrid.innerHTML = "";
+            res.items.forEach((itemRef) => {
+                getDownloadURL(itemRef).then((url) => {
+                    const div = document.createElement("div");
+                    div.classList.add("col", "image-item");
+                    div.innerHTML = `
+                        <div class=\"card shadow-sm\" style=\"position: relative;\" >
+                            <img class=\"gallery_img card-img\" alt=\"image of clay piece\" src=\"${url}\" />
+                            <button class=\"delete-btn\" data-path=\"${itemRef.fullPath}\" style=\"position:absolute;top:5px;right:5px;background:red;color:white;border:none;cursor:pointer;\">X</button>
+                        </div>
+                    `;
+                    imageGrid.appendChild(div);
+                });
             });
-        });
+        })
+        .catch((err) => console.error("Error loading images:", err));
+}
+
+// Function to enable drag-and-drop sorting
+function enableSorting() {
+    if (!imageGrid) return;
+    new Sortable(imageGrid, {
+        animation: 150,
+        onEnd: (evt) => console.log(`Moved from ${evt.oldIndex} to ${evt.newIndex}`),
     });
 }
 
-// Drag-and-drop sorting
-function enableSorting() {
-    if (imageGrid) {
-        new Sortable(imageGrid, {
-            animation: 150,
-            onEnd: function (evt) {
-                console.log(`Moved from ${evt.oldIndex} to ${evt.newIndex}`);
-            },
-        });
-    }
-}
+// Function to upload image (requires login on upload page)
+window.uploadImage = async () => {
+    if (!fileInput) return;
+    const file = fileInput.files[0];
+    if (!file) return alert("Please select a file to upload.");
 
-// ✅ Upload image using signed URL from your HTTPS function
-window.uploadImage = async function () {
-    const file = fileInput?.files?.[0];
-    if (!file) {
-        alert("Please select a file to upload.");
-        return;
-    }
-
+    const fileRef = ref(storage, `uploads/${Date.now()}-${file.name}`);
     try {
-        // STEP 1: Get a signed upload URL from your deployed Firebase function
-        const response = await fetch(
-            "https://getsignedurl-cpn3o4aa6a-uc.a.run.app", // ⚠️ ← Your new function URL
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    filename: file.name,
-                    contentType: file.type,
-                }),
-            }
-        );
-
-        if (!response.ok) throw new Error("Failed to get signed URL");
-        const { url, path } = await response.json();
-
-        // STEP 2: Upload directly to the signed URL
-        const uploadRes = await fetch(url, {
-            method: "PUT",
-            headers: { "Content-Type": file.type },
-            body: file,
-        });
-
-        if (!uploadRes.ok) throw new Error("Upload failed");
-
+        await uploadBytes(fileRef, file);
         alert("Image uploaded successfully!");
         loadImages();
     } catch (err) {
-        alert("Upload failed: " + err.message);
         console.error("Upload error:", err);
+        alert("Upload failed: " + err.message);
     }
 };
 
-// Delete image from Firebase
-imageGrid?.addEventListener("click", (e) => {
-    if (e.target.classList.contains("delete-btn")) {
-        const path = e.target.getAttribute("data-path");
-        const fileRef = ref(storage, path);
-        deleteObject(fileRef)
-            .then(() => {
-                alert("Deleted");
-                loadImages();
-            })
-            .catch((err) => {
-                alert("Failed to delete: " + err.message);
-            });
-    }
-});
+// Function to delete image
+if (imageGrid) {
+    imageGrid.addEventListener("click", (e) => {
+        if (e.target.classList.contains("delete-btn")) {
+            const path = e.target.getAttribute("data-path");
+            if (!path) return;
+            const fileRef = ref(storage, path);
+            deleteObject(fileRef)
+                .then(() => {
+                    alert("Deleted");
+                    loadImages();
+                })
+                .catch((err) => {
+                    console.error("Delete error:", err);
+                    alert("Failed to delete: " + err.message);
+                });
+        }
+    });
+}
 
-// Auth: login
-window.login = function () {
+// Auth functions
+window.login = () => {
     const email = document.getElementById("email")?.value;
     const password = document.getElementById("password")?.value;
     signInWithEmailAndPassword(auth, email, password)
-        .then(() => {
-            alert("Logged in");
-        })
-        .catch((err) => {
-            alert(err.message);
-        });
+        .then(() => alert("Logged in"))
+        .catch((err) => alert(err.message));
 };
 
-// Auth: logout
-window.logout = function () {
-    signOut(auth).then(() => {
-        alert("Logged out");
-    });
+window.logout = () => {
+    signOut(auth).then(() => alert("Logged out"));
 };
 
-// Handle UI on login state change
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        uploadSection?.style && (uploadSection.style.display = "block");
-        authSection?.style && (authSection.style.display = "none");
-        loadImages();
-        setTimeout(enableSorting, 1000);
-    } else {
-        uploadSection?.style && (uploadSection.style.display = "none");
-        authSection?.style && (authSection.style.display = "block");
-        imageGrid && (imageGrid.innerHTML = "");
-    }
-});
+// Initialize UI based on page and auth state
+if (uploadSection) {
+    // Upload page: gate upload by auth
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            uploadSection.style.display = "block";
+            authSection.style.display = "none";
+        } else {
+            uploadSection.style.displ
